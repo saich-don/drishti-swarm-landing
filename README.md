@@ -90,13 +90,35 @@ npm run preview
 
 ---
 
-## 🌐 Deploy to Vercel (Instant Git Sync)
+## 🌐 One-Click Deployments (Universal Platform Ready)
 
-1. Fork or push this repository to your GitHub account.
-2. Go to [Vercel](https://vercel.com/) and click **Add New Project**.
-3. Import `drishti-swarm-landing`.
-4. The build settings are auto-detected via Vite (`npm run build` -> output: `dist`).
-5. Click **Deploy**. Any future commits pushed to `main` will automatically trigger a live zero-downtime deployment!
+This repository includes pre-configured settings and rewrite rules for all major cloud and serverless hosts:
+
+### 1. Vercel (Recommended — Automatic Git Sync)
+* Uses root [`vercel.json`](./vercel.json).
+* Import repository into [Vercel](https://vercel.com/) -> Framework preset: **Vite** -> Deploy.
+
+### 2. Netlify (Automatic Git Sync)
+* Uses root [`netlify.toml`](./netlify.toml) and [`public/_redirects`](./public/_redirects).
+* Import repository into [Netlify](https://www.netlify.com/) -> Build command: `npm run build` -> Publish directory: `dist`.
+
+### 3. Cloudflare Pages
+* Uses [`public/_redirects`](./public/_redirects) and [`public/_headers`](./public/_headers) for SPA fallback and performance caching.
+* Connect repository on [Cloudflare Pages](https://pages.cloudflare.com/) -> Framework preset: **Vite** -> Deploy.
+
+### 4. GitHub Pages (Automated via GitHub Actions)
+* A pre-built workflow is ready at [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml).
+* Go to repository **Settings** -> **Pages** -> Source: **GitHub Actions**.
+* Any push to `main` automatically triggers build and zero-downtime deployment!
+
+### 5. Google Cloud Run / Docker
+* Uses the multi-stage [`Dockerfile`](./Dockerfile) and production [`nginx.conf`](./nginx.conf).
+* Build and deploy via Google Cloud CLI:
+  ```bash
+  # Build and deploy directly to Cloud Run
+  gcloud run deploy drishti-swarm-net --source . --platform managed --allow-unauthenticated
+  ```
+
 
 ---
 

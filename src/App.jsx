@@ -37,7 +37,7 @@ function useDarkMode() {
 export default function App() {
   const [dark, setDark] = useDarkMode();
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<Layout dark={dark} setDark={setDark} />}>
           <Route index         element={<Home dark={dark} />} />
